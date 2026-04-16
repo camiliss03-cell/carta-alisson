@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para ti 💌</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+font-family:'Poppins',sans-serif;
+background:radial-gradient(circle at top,#0f172a,#020617);
+color:white;
+}
+
+/* INTRO */
+#intro{
+position:absolute;
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+transition:1s;
+cursor:pointer;
+z-index:10;
+}
+
+#intro h1{
+font-family:'Dancing Script';
+font-size:2.5em;
+animation:fade 2s forwards;
+}
+
+#intro p{
+opacity:0.7;
+font-size:14px;
+margin-top:10px;
+}
+
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
+}
+
+/* ESTRELLAS */
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+animation:blink 2s infinite alternate;
+}
+
+@keyframes blink{
+from{opacity:0.3}
+to{opacity:1}
+}
+
+/* FLORES */
+@keyframes caer{
+to{transform:translateY(110vh)}
+}
+
+/* SOBRE */
+.sobre{
+display:none;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:180px;
+height:120px;
+background:#ff8fab;
+border-radius:10px;
+cursor:pointer;
+z-index:5;
+}
+
+.tapa{
+position:absolute;
+width:100%;
+height:100%;
+background:#ff4d6d;
+clip-path:polygon(0 0,50% 60%,100% 0);
+}
+
+/* CARTA */
+.carta{
+display:none;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+color:#5a2a3b;
+padding:30px;
+border-radius:20px;
+text-align:center;
+width:80%;
+max-width:500px;
+z-index:5;
+}
+
+/* STORIES */
+.story{
+display:none;
+position:absolute;
+width:100%;
+height:100vh;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+padding:20px;
+}
+
+.story img{
+max-width:90%;
+max-height:70vh;
+object-fit:contain;
+border-radius:20px;
+}
+
+.story p{
+margin-top:15px;
+font-size:16px;
+text-align:center;
+max-width:300px;
+opacity:0;
+animation:aparecer 1s forwards;
+}
+
+@keyframes aparecer{
+to{opacity:1}
+}
+
+/* CARTA FINAL */
+.finalCarta{
+display:none;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+color:#5a2a3b;
+padding:30px;
+border-radius:20px;
+max-width:600px;
+text-align:center;
+z-index:5;
+}
+
+/* ESCENA FINAL */
+.escena{
+display:none;
+height:100vh;
+width:100%;
+background:radial-gradient(circle,#020617,#000);
+position:relative;
+}
+
+/* COHETE */
+.rocket{
+position:absolute;
+bottom:-100px;
+left:20%;
+font-size:40px;
+animation:volar 5s ease-out forwards;
+}
+
+@keyframes volar{
+0%{transform:translate(0,0);opacity:1}
+80%{transform:translate(60vw,-60vh);opacity:1}
+100%{transform:translate(60vw,-60vh);opacity:0}
+}
+
+/* ESTRELLA FINAL */
+.starFinal{
+position:absolute;
+top:20%;
+right:20%;
+font-size:30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div id="intro" onclick="entrar()">
+<h1>Hay algo para ti ✨</h1>
+<p>(toca la pantalla)</p>
+</div>
+
+<!-- SOBRE -->
+<div class="sobre" id="sobre" onclick="abrirCarta()">
+<div class="tapa"></div>
+</div>
+
+<!-- CARTA -->
+<div class="carta" id="carta">
+<h1>Feliz cumpleaños estrellita linda ✨</h1>
+<p id="texto"></p>
+</div>
+
+<!-- STORIES -->
+<div id="story" class="story">
+<img id="imgStory">
+<p id="txtStory"></p>
+</div>
+
+<!-- CARTA FINAL -->
+<div id="finalCarta" class="finalCarta">
+<p>
+gracias por compartir casi media década conmigo, estoy agradecido por todo lo aprendido y por todo el amor incondicional que me alcanzaste a dar, ya solo quedan recuerdos y experiencias inolvidables, experiencias que nunca se me olvidarán, porque simplemente, tú, eres inolvidable, gracias por todo, gracias a ti, aprendí a ser alguien, y aunque nos lastimamos, no cambiaría la experiencia si pudiera volver todo atrás, porque todo fue perfecto, feliz cumpleaños.
+</p>
+
+<p><strong>hasta pronto… espero encontrarte allá arriba 🌙</strong></p>
+
+<button onclick="escenaFinal()">Final 🚀</button>
+</div>
+
+<!-- ESCENA FINAL -->
+<div id="escena" class="escena">
+<div class="rocket">🚀 me</div>
+<div class="starFinal">⭐ you</div>
+</div>
+
+<script>
+
+/* ESTRELLAS */
+for(let i=0;i<80;i++){
+let s=document.createElement("div");
+s.className="star";
+s.style.top=Math.random()*100+"%";
+s.style.left=Math.random()*100+"%";
+document.body.appendChild(s);
+}
+
+/* FLORES */
+setInterval(()=>{
+let f=document.createElement("div");
+f.innerHTML="🌼";
+f.style.position="absolute";
+f.style.left=Math.random()*window.innerWidth+"px";
+f.style.top="-20px";
+f.style.fontSize="20px";
+f.style.animation="caer 6s linear";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),6000);
+},300);
+
+/* ENTRAR */
+function entrar(){
+let intro=document.getElementById("intro");
+intro.style.opacity="0";
+
+setTimeout(()=>{
+intro.style.display="none";
+document.getElementById("sobre").style.display="block";
+},1000);
+}
+
+/* CARTA */
+function abrirCarta(){
+document.getElementById("sobre").style.display="none";
+document.getElementById("carta").style.display="block";
+escribir();
+}
+
+const mensaje="espero que la pases bien el día de hoy, siento no estar contigo en un día tan importante para ti, espero que cumplas tus metas y que Dios te siga dando fuerzas y bendiciones cada día 💛";
+
+function escribir(){
+let i=0;
+let t=document.getElementById("texto");
+
+let inter=setInterval(()=>{
+t.innerHTML+=mensaje[i];
+i++;
+if(i>=mensaje.length){
+clearInterval(inter);
+setTimeout(iniciarStories,1000);
+}
+},30);
+}
+
+/* STORIES */
+const fotos=[
+{img:"foto1.jpg",txt:"ese día estaba nervioso, demasiado, no sabía si ir o no, pero valió totalmente la pena 💛"},
+{img:"foto2.jpg",txt:"adobraba ese color canela tuyo 💛"},
+{img:"foto3.jpg",txt:"ni el sol brilla tanto como tú 💛"},
+{img:"foto4.jpg",txt:"en las tiendas no encuentro a gente así de linda 💛"},
+{img:"foto5.jpg",txt:"las mejores películas fueron a tu lado 💛"}
+];
+
+let i=0;
+
+function iniciarStories(){
+document.getElementById("carta").style.display="none";
+document.getElementById("story").style.display="flex";
+mostrarStory();
+}
+
+function mostrarStory(){
+if(i>=fotos.length){
+document.getElementById("story").style.display="none";
+document.getElementById("finalCarta").style.display="block";
+return;
+}
+
+document.getElementById("imgStory").src=fotos[i].img;
+
+let txt=document.getElementById("txtStory");
+txt.style.opacity=0;
+
+setTimeout(()=>{
+txt.innerText=fotos[i].txt;
+txt.style.opacity=1;
+},500);
+
+i++;
+setTimeout(mostrarStory,3000);
+}
+
+/* FINAL */
+function escenaFinal(){
+document.getElementById("finalCarta").style.display="none";
+document.getElementById("escena").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
